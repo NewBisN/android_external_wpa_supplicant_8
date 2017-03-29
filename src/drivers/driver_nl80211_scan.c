@@ -949,9 +949,10 @@ int wpa_driver_nl80211_vendor_scan(struct i802_bss *bss,
 			wpa_hexdump_ascii(MSG_MSGDUMP, "nl80211: Scan SSID",
 					params->ssids[i].ssid,
 					params->ssids[i].ssid_len);
-			if (nla_put(msg, i + 1, params->ssids[i].ssid_len,
-				    params->ssids[i].ssid))
-				goto fail;
+                                if (params->ssids[i].ssid_len)
+                               if (nla_put(msg, i + 1, params->ssids[i].ssid_len,
+                                           params->ssids[i].ssid))
+                                       goto fail;
 		}
 		nla_nest_end(msg, ssids);
 	}
